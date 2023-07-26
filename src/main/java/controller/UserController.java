@@ -5,10 +5,7 @@ import dto.UserDTO;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import service.UserService;
 
@@ -21,9 +18,19 @@ public class UserController {
     UserService userService;
 
     @GET
-    @RolesAllowed({"ADMIN", "USER"})
+    //@RolesAllowed({"ADMIN", "USER"})
     public Response findAll() {
         return Response.ok(userService.findAllDTO()).build();
+    }
+
+    @POST
+    public Response create(final UserDTO user) {
+        return Response.ok(userService.create(user)).build();
+    }
+
+    @PUT
+    public Response update(final UserDTO user) {
+        return Response.ok(userService.update(user)).build();
     }
 
     @GET

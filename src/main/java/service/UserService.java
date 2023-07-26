@@ -22,8 +22,16 @@ public class UserService {
         return repository.getAll();
     }
 
+    public UserDTO create(UserDTO user) {
+        return repository.saveIfNotExists(user);
+    }
+
+    public UserDTO update(UserDTO user) {
+        return repository.save(user);
+    }
+
     public UserDTO findByEmail(String email) {
-        return repository.findByEmail(email);
+        return repository.findById(email);
     }
 
     public String authenticate(UserDTO user) {
@@ -38,5 +46,4 @@ public class UserService {
     private UserDTO authenticate(String username, String password) {
         return repository.authenticate(username, password);
     }
-
 }

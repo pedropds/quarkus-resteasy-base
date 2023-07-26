@@ -103,6 +103,11 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.9.4</version> <!-- Replace with the latest version available -->
+    </dependency>
   </dependencies>
   <build>
     <plugins>
