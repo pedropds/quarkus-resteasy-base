@@ -41,13 +41,15 @@ abstract class AbstractRepository<E extends BaseEntity<? extends Serializable>, 
     @Transactional
     public D saveIfNotExists(D dto) {
         E entity = getMapper().toEntity(dto);
-        E persisted = getEntityManager().find(getEntityType(), entity.getId());
 
-        if (persisted != null)
-            return null;
+        if (entity.getId() != null) {
+            E persisted = getEntityManager().find(getEntityType(), entity.getId());
+            if (persisted != null)
+                return null;
+        }
 
         persist(entity);
-        return dto;
+        return getMapper().toDTO(entity);
     }
 
     @Transactional

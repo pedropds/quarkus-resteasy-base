@@ -2,7 +2,6 @@ package controller;
 
 import dto.TokenDTO;
 import dto.UserDTO;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -43,7 +42,7 @@ public class UserController {
     @Path("login")
     public Response login(final UserDTO user) {
         var token = TokenDTO.builder()
-                .token(userService.authenticate(user))
+                .token(userService.login(user))
                 .build();
 
         return token != null ? Response.ok(token).build() : Response.status(Response.Status.UNAUTHORIZED).build();

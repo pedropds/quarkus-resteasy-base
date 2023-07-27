@@ -8,4 +8,5 @@ import lombok.Value;
 public class ErrorDTO {
     String message;
     String type;
+    String stackTrace;
 }

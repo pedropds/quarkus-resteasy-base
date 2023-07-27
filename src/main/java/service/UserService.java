@@ -34,16 +34,12 @@ public class UserService {
         return repository.findById(email);
     }
 
-    public String authenticate(UserDTO user) {
-        var authenticatedUser = authenticate(user.email, user.password);
+    public String login(UserDTO user) {
+        var authenticatedUser = repository.authenticate(user.email, user.password);
 
         if(authenticatedUser == null)
             throw new BadRequestException("Invalid credentials");
 
         return tokenHelper.generateToken(authenticatedUser);
-    }
-
-    private UserDTO authenticate(String username, String password) {
-        return repository.authenticate(username, password);
     }
 }

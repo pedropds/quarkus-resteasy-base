@@ -11,9 +11,13 @@ import repository.BaseEntity;
 @NoArgsConstructor
 @Data
 @Table(name = "appuser")
-public class User extends BaseEntity<String> {
+public class User extends BaseEntity<Long> {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQUENCE_GEN")
+    @SequenceGenerator(name = "USER_SEQUENCE_GEN", sequenceName = "appuser_id_seq", allocationSize = 1)
+    public Long id;
+
     public String email;
 
     public String name;
@@ -23,8 +27,8 @@ public class User extends BaseEntity<String> {
     public String roles;
 
     @Override
-    public String getId() {
-        return email;
+    public Long getId() {
+        return id;
     }
 }
 
