@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public UserDTO findByEmail(String email) {
-        return repository.findById(email);
+        return repository.findByEmail(email);
     }
 
     public String login(UserDTO user) {
