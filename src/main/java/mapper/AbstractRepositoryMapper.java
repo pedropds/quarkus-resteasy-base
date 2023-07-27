@@ -21,8 +21,8 @@ public interface AbstractRepositoryMapper<E, D>{
         var implTypes = TypeUtils.getTypeArguments(getClass(), AbstractRepositoryMapper.class);
 
         return implTypes.entrySet().stream()
-                .filter(entry -> typeParameters[0].equals(entry.getKey()))
-                .map(entry -> (Class<E>) entry.getValue())
+                .filter(e -> e.getKey().equals(typeParameters[0]))
+                .map(e -> (Class<E>) e.getValue())
                 .findFirst()
                 .orElseThrow();
     }

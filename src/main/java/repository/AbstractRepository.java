@@ -1,5 +1,6 @@
 package repository;
 
+import exception.BadRequestException;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.transaction.Transactional;
 import mapper.AbstractRepositoryMapper;
@@ -42,9 +43,10 @@ abstract class AbstractRepository<E extends BaseEntity<? extends Serializable>, 
         E entity = getMapper().toEntity(dto);
         E persisted = getEntityManager().find(getEntityType(), entity.getId());
 
-        if (persisted == null)
-            persist(entity);
+        if (persisted != null)
+            return null;
 
+        persist(entity);
         return dto;
     }
 
