@@ -11,6 +11,7 @@ import service.UserService;
 
 @Path("user")
 @RequestScoped
+@SuppressWarnings("unused")
 public class UserController {
 
     @Inject
@@ -33,8 +34,8 @@ public class UserController {
     }
 
     @GET
-    @Path("email")
-    public Response findByEmail(@QueryParam("email") String email) {
+    @Path("email/{email}")
+    public Response findByEmail(@PathParam("email") String email) {
         return Response.ok(userService.findByEmail(email)).build();
     }
 
