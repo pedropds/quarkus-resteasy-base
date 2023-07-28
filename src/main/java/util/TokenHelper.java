@@ -15,14 +15,14 @@ public class TokenHelper {
     @ConfigProperty(name = "quarkus-resteasy-base.token.expiration")
     private Long accessTokenExpiration;
 
+    private static final String NAME = "name";
+
     public String generateToken(UserDTO user){
         var roles = new HashSet<>(user.getRoles());
-        String name = "name";
-
         return Jwt.issuer(issuer)
                 .upn(user.email)
                 .groups(roles)
-                .claim(name, user.name)
+                .claim(NAME, user.name)
                 .expiresAt(currentTimeInSecs() + accessTokenExpiration)
                 .sign();
     }
